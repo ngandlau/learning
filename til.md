@@ -127,3 +127,23 @@ foo@bar:~$ which python2
 foo@bar:~$ which python3
 /usr/bin/python3
 ```
+
+## Git workflow
+
+New commands:
+
+```console
+git log
+git log --graph
+git stash
+git stash pop
+git rebase -i master
+git commit -a --amend
+git reset --hard HEAD~
+git rebase --abort
+git rebase -i master
+git rebase continue
+git push -f
+git push -f origin <branch_name>
+git branch -D <branch_name>
+```
