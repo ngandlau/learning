@@ -128,7 +128,7 @@ foo@bar:~$ which python3
 /usr/bin/python3
 ```
 
-# 2022-07-
+# 2022-07-20
 
 ## Git workflow
 
@@ -167,3 +167,31 @@ my_path.iterdir()
 my_path.absolute()
 my_path.mkdir()
 ```
+
+## logging
+
+If you want to report events that occur during the normal operation of a program (e.g. for status monitoring or fault investigation), you use *logs*.
+
+* **warnings**: An indication that something unexpected happened, or indicative of some problem in the near future (e.g. ‘disk space low’). The software is still working as expected.
+* **info**: Confirmation that things are working as expected; for very detailed output for diagnostic purposes.
+
+```python logger.py
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(message)s', 
+    datefmt='%m/%d/%Y %I:%M:%S %p'
+)
+
+logger = logging.getLogger(__name__)
+
+logger.warning('some warning')
+logger.info('some info')
+```
+
+```console
+$ python logger.py
+07/20/2022 06:48:56 PM Hello warning
+07/20/2022 06:48:56 PM Goodbye info
+```
+
+
