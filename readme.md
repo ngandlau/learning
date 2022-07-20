@@ -175,7 +175,10 @@ If you want to report events that occur during the normal operation of a program
 * **warnings**: An indication that something unexpected happened, or indicative of some problem in the near future (e.g. ‘disk space low’). The software is still working as expected.
 * **info**: Confirmation that things are working as expected; for very detailed output for diagnostic purposes.
 
-```python logger.py
+```python 
+# logger.py
+import logging
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s %(message)s', 
