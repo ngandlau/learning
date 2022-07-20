@@ -1,3 +1,5 @@
+
+
 # Bte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -130,3 +132,7 @@ dmypy.json
 
 # Vim
 *.swp
+
+# .private
+.private/
+.db_analytics/

@@ -128,6 +128,8 @@ foo@bar:~$ which python3
 /usr/bin/python3
 ```
 
+# 2022-07-
+
 ## Git workflow
 
 New commands:
@@ -146,4 +148,22 @@ git rebase continue
 git push -f
 git push -f origin <branch_name>
 git branch -D <branch_name>
+```
+
+## pathlib, Path 
+
+`Path` extends a string containing a path with additional functionality.
+
+```python
+from pathlib import Path
+
+Path.cwd()
+Path.home()
+
+
+my_path = Path('/home/user/')
+
+my_path.iterdir()
+my_path.absolute()
+my_path.mkdir()
 ```
