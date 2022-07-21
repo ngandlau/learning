@@ -1,5 +1,3 @@
-# 2022-07-16
-
 ## Interfaces in Python using `ABC` and `@abstractmethod`
 
 ```python
@@ -128,8 +126,6 @@ foo@bar:~$ which python3
 /usr/bin/python3
 ```
 
-# 2022-07-20
-
 ## Git workflow
 
 New commands:
@@ -197,4 +193,36 @@ $ python logger.py
 07/20/2022 06:48:56 PM Goodbye info
 ```
 
+## psycopg2
 
+```python
+config = {
+    'host'      : '',
+    'port'      : '',
+    'dbname'    : '',
+    'user'      : '',
+    'password'  : '',
+}
+
+conn = psycopg2.connect(config)
+
+with conn:
+    with conn.cursor() as curs:
+        curs.execute(SQL1)
+
+with conn:
+    with conn.cursor() as curs:
+        curs.execute(SQL2)
+
+conn.close()
+
+```
+
+## workflow with poetry
+
+```console
+git clone <repo_name>
+poetry install          # creates a venv, installs all non-optional (!) dependencies
+poetry shell            # activates venv
+deactivate              # deactivate venv
+```
