@@ -227,3 +227,41 @@ poetry install --exit "..." # install optional dependencies specified inside "..
 poetry shell                # activates venv
 deactivate                  # deactivate venv
 ```
+
+## environment variables
+
+Environment variables are variables in *your* system that describe *your* environment.
+
+PATH is an environment variable that contains the paths to all folders that might contain executables. Your machine will look for executables in the directories specified in PATH. So when you run `~$ python` in your terminal, your machine looks for Python's executable in the directories listed in PATH. 
+
+You can always run executables in your terminal by specifying the absolute path, but that would be tedious. For example, we could run python on our machine by saying 
+
+```console
+~$ /usr/bin/python
+```
+
+which is much more complicated than just saying 
+
+```console
+~$ python
+```
+
+---
+
+You can also define your own environment variables. It is useful to set environment variables like `GOOGLE_ACCOUNT_USERNAME` and `GOOGLE_ACCOUNT_PASSWORD`.
+
+To set an environment variable in Linux, add a line in your `.bashrc` file:
+
+```
+export GOOGLE_ACCOUNT_USERNAME=myusername
+export GOOGLE_ACCOUNT_PASSWORD=mypassword
+```
+
+Once these environment variables are set, you can consume them in python:
+
+```python
+import os
+
+google_username = os.environ['GOOGLE_ACCOUNT_USERNAME']
+google_password = os.environ['GOOGLE_ACCOUNT_PASSWORD']
+```
