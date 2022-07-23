@@ -265,3 +265,22 @@ import os
 google_username = os.environ['GOOGLE_ACCOUNT_USERNAME']
 google_password = os.environ['GOOGLE_ACCOUNT_PASSWORD']
 ```
+
+## copy-on-write
+
+Suppose you have a dataframe `df_1` and you want to make a copy `df_2` on which you want to make modifications. The idea of [Copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write) is that not until you made any modification on `df_2`, there is no need to make the copy. For as long as `df_1` and `df_2` are the same, they can share the same resource. A new resource must only be created once you modify `df_2`.
+
+## shallow copy vs deep copy
+
+A deep copy is what non-programmers assume a copy is: a copy of an object that is completely independent from the original object. If I copy an artwork, the copy is completely independent of the original. If one removes paint from the original, my copy remains unaffected.
+
+In programming, a deep copy of a collection object (eg, a list or dataframe) is completely independent of the original object. The copy constructs a *new* collection object and recursively populates it with *copies* of the child objects (the elements of the list, or the data in the dataframe). Thus, if I change an element of the copy, the elements of the original remain unchanged.
+
+A *shallow copy* constructs a *new* collection object, but does not copy the child objects. Instead, the new collection object is populated with *references* to the child objects of the original object. That leads to the following behavior:
+
+* appending a new element to `copy` will not affect `original`. The new element is in `copy` but not in `original`
+* changing an element in `copy` will change the same element in `original`, because the elements of `copy` point to the elements of `original`.
+
+For illustrative examples, look at this [Jupyter Notebook](https://github.com/ngandlau/learning/blob/master/python/deep_vs_shallow_copy.ipynb).
+
+
