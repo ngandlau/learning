@@ -1,4 +1,4 @@
-from enum import Enum, auto
+from enum import Enum, IntEnum, auto
 
 
 class Colors(Enum):
@@ -29,8 +29,8 @@ if __name__ == '__main__':
     # Because BLUE=0 and RED=0, it's like BLUE and RED are the same!
     print()
     print(len(Colors))
-    print(color.BLUE == color.RED)
-    print(color.BLUE.value == color.RED.value)
+    print(Colors.BLUE == Colors.RED)
+    print(Colors.BLUE.value == Colors.RED.value)
 
     # Enumeration members (BLUE, RED, GREEN) are hashable, hence can be used
     # as keys in dictionaries
