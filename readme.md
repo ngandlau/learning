@@ -287,7 +287,11 @@ For illustrative examples, look at this [Jupyter Notebook](https://github.com/ng
 
 Most useful for loading data from JSON files into Python. Pydantic allows you squish data from a JSON-file into the right format with specified datatypes.
 
-Example: 
+* pydantic converts datatypes if possible. 
+    * If the data is a string, but you want it to be float, it tries to convert to float: '29.99' -> 29.99
+    * str -> bool: 't' -> True; 'f' -> False; '0' -> False, 'true' -> True
+
+Example (from https://stefan.sofa-rockers.org/2020/05/29/attrs-dataclasses-pydantic/)
 
 ```console
 >>> from datetime import datetime
