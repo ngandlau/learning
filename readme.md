@@ -283,4 +283,33 @@ A *shallow copy* constructs a *new* collection object, but does not copy the chi
 
 For illustrative examples, look at this [Jupyter Notebook](https://github.com/ngandlau/learning/blob/master/python/deep_vs_shallow_copy.ipynb).
 
+## pydantic
 
+Most useful for loading data from JSON files into Python. Pydantic allows you squish data from a JSON-file into the right format with specified datatypes.
+
+Example: 
+
+```console
+>>> from datetime import datetime
+>>> from pydantic import BaseModel
+>>>
+>>> class Child(BaseModel):
+...     x: int
+...     y: int
+...     d: datetime
+...
+>>> class Parent(BaseModel):
+...     name: str
+...     child: Child
+...
+>>> data = {
+...     'name': 'spam',
+...     'child': {
+...         'x': 23,
+...         'y': '42',  # sic!
+...         'd': '2020-05-04T13:37:00',
+...     },
+... }
+>>> Parent(**data)
+Parent(name='spam', child=Child(x=23, y=42, d=datetime.datetime(2020, 5, 4, 13, 37)))
+```
