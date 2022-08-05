@@ -223,7 +223,7 @@ conn.close()
 ```console
 git clone <repo_name>
 poetry install              # creates a venv, installs all non-optional (!) dependencies
-poetry install --exit "..." # install optional dependencies specified inside "..." 
+poetry install --extras "..." # install optional dependencies specified inside "..." 
 poetry shell                # activates venv
 deactivate                  # deactivate venv
 ```
