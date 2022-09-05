@@ -5,9 +5,11 @@ class Kpi(ABC):
     value = None
     required_schema = None
 
+    @abstractmethod
     def get_value(self):
         return self.value
 
+    @abstractmethod
     def get_required_schema(self):
         return self.required_schema
 
