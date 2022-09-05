@@ -317,3 +317,25 @@ Example (from https://stefan.sofa-rockers.org/2020/05/29/attrs-dataclasses-pydan
 >>> Parent(**data)
 Parent(name='spam', child=Child(x=23, y=42, d=datetime.datetime(2020, 5, 4, 13, 37)))
 ```
+
+## Test-Driven Development
+
+[Interview with Martin Fowler](https://www.artima.com/articles/test-driven-development)
+
+> If I'm creating a Money class, I'll make plus work first before I even think about the interface of multiply. Just get plus to work. Don't think about anything else, just focus on plus.
+
+Don't plan the whole interface. Implement one method of the class, and do it in a way so that you can confidently claim: "this method works. It does exactly what it should do."
+
+After the method does what it should it, *refactor* it to make it nice.
+
+> I made it work, then I abstracted it.
+
+So the process comes down to:
+
+1. *develop*: work on a single method/function
+2. *test*: write tests to check whether the function works as it should do
+3. *refactor*: if you're tested the function, you can refactor it
+
+Note that if you swap (1) with (2), you'll get *test-driven development*.
+
+> It reduces the scope of what you have to think about. You don't have to think about everything you have to do in the class. You just have to think about one little piece of responsibility. You make that work and then you refactor it so everything is very nicely designed.
