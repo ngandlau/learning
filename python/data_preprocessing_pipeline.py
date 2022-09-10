@@ -4,7 +4,7 @@ The idea comes from https://www.youtube.com/watch?v=L_KlPZ5qBOU
 """
 
 import pandas as pd
-from functools import reduce
+from functools import reduce, partial
 
 data = {'age': [18, 30, 40, 45], 'salary_per_month': [1000, 4000, 5000, 8000]}
 df = pd.DataFrame(data)
@@ -19,6 +19,10 @@ def create_column_salary_per_year(df: pd.DataFrame) -> pd.DataFrame:
 	df['salary_per_year'] = df['salary'] * 12
 	return df
 
+def multiply_column_by_constant(df: pd.DataFrame, column: str, constant: int) -> pd.DataFrame
+	df[column] = df[column] * constant
+	return df
+
 def compose(*functions: Preprocessor) -> Preprocessor:
 	return reduce(lambda f, g: lambda x: g(f(x)))
 
@@ -27,6 +31,7 @@ if __name__ == '__main__':
 	preprocessor = Preprocessor(
 		create_column_age_group,
 		create_column_salary_per_year
+		partial(multiply_column_by_constant(column='salary_per_month', constant=2))
 	)
 	
 	# apply preprocessing pipeline to dataframe
