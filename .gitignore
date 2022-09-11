@@ -136,3 +136,6 @@ dmypy.json
 # .private
 .private/
 .db_analytics/
+
+learning
+.gitignore
