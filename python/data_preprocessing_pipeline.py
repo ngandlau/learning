@@ -29,7 +29,6 @@ def multiply_column_by_constant(df: pd.DataFrame, column: str, constant: int) ->
 
 
 if __name__ == '__main__':
-	# define preprocessing pipeline
 	apply_preprocessing_pipeline = compose(
 		create_column_is_younger_than_18,
 		create_column_salary_per_year,
@@ -37,10 +36,7 @@ if __name__ == '__main__':
 	)
 	
 	print(df.head())
-	
-	# apply preprocessing pipeline to dataframe *inplace*
 	apply_preprocessing_pipeline(df)
-
 	print(df.head())
 
 
