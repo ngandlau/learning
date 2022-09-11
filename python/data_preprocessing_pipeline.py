@@ -3,38 +3,44 @@ An elegant way to define a data preprocessing pipeline using function compositio
 The idea comes from https://www.youtube.com/watch?v=L_KlPZ5qBOU
 """
 
+from functools import partial, reduce
+from typing import Callable
 import pandas as pd
-from functools import reduce, partial
+
+Preprocessor = Callable[[pd.DataFrame], pd.DataFrame]
 
 data = {'age': [18, 30, 40, 45], 'salary_per_month': [1000, 4000, 5000, 8000]}
 df = pd.DataFrame(data)
 
-Preprocessor = Callable([pd.DataFrame], pd.DataFrame)
+def compose(*functions: Preprocessor) -> Preprocessor:
+	return reduce(lambda f,g: lambda x: g(f(x)), functions)
 
-def create_column_age_group(df: pd.DataFrame) -> pd.DataFrame:
-	df['age_group'] = df['age'].map(lambda age: if age < 18: 'young' else 'old')
+def create_column_is_younger_than_18(df: pd.DataFrame) -> pd.DataFrame:
+	df['is_younger_than_18'] = df['age'] < 18
 	return df
 
 def create_column_salary_per_year(df: pd.DataFrame) -> pd.DataFrame:
-	df['salary_per_year'] = df['salary'] * 12
+	df['salary_per_year'] = df['salary_per_month'] * 12
 	return df
 
-def multiply_column_by_constant(df: pd.DataFrame, column: str, constant: int) -> pd.DataFrame
+def multiply_column_by_constant(df: pd.DataFrame, column: str, constant: int) -> pd.DataFrame:
 	df[column] = df[column] * constant
 	return df
 
-def compose(*functions: Preprocessor) -> Preprocessor:
-	return reduce(lambda f, g: lambda x: g(f(x)))
 
 if __name__ == '__main__':
 	# define preprocessing pipeline
-	preprocessor = Preprocessor(
-		create_column_age_group,
-		create_column_salary_per_year
-		partial(multiply_column_by_constant(column='salary_per_month', constant=2))
+	apply_preprocessing_pipeline = compose(
+		create_column_is_younger_than_18,
+		create_column_salary_per_year,
+		partial(multiply_column_by_constant, column='salary_per_month', constant=2)
 	)
 	
-	# apply preprocessing pipeline to dataframe
-	df_preprocessed = preprocessor(df)
+	print(df.head())
+	
+	# apply preprocessing pipeline to dataframe *inplace*
+	apply_preprocessing_pipeline(df)
+
+	print(df.head())
 
 
