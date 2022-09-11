@@ -7,10 +7,10 @@ from functools import partial, reduce
 from typing import Callable
 import pandas as pd
 
-Preprocessor = Callable[[pd.DataFrame], pd.DataFrame]
-
 data = {'age': [18, 30, 40, 45], 'salary_per_month': [1000, 4000, 5000, 8000]}
 df = pd.DataFrame(data)
+
+Preprocessor = Callable[[pd.DataFrame], pd.DataFrame]
 
 def compose(*functions: Preprocessor) -> Preprocessor:
 	return reduce(lambda f,g: lambda x: g(f(x)), functions)
