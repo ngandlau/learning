@@ -1,3 +1,29 @@
+## Composing SQL queries with psycopg2
+
+```python
+import psycopg2.sql as sql
+
+cols = ['name', 'alter']
+
+query = SQL("""
+SELECT
+    {select},
+    COUNT(*)
+FROM schema.table
+WHERE 
+    name LIKE 'Nils%'
+    alter = 18
+GROUP BY 
+    {groupby}
+""").format(
+    select=sql.Identifier('name']),
+    groupby=sql.SQL(', ').join([sql.Identifier(col) for col in cols])
+)
+
+with get_connection(config) as conn:
+    df = pd.read_sql(query, conn)
+```
+
 ## Interfaces in Python using `ABC` and `@abstractmethod`
 
 ```python
