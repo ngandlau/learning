@@ -7,9 +7,9 @@ class SimulationRun:
     name: str
     path_to_csv: str 
 
-def __init__(self, name):
-    self.name = name
-    self.path_to_csv = '/path/to/data/' + name + '.csv'
+    def __init__(self, name):
+        self.name = name
+        self.path_to_csv = '/path/to/data/' + name + '.csv'
 
 def calculate_things(simrun: SimulationRun):
     df = load(path=simrun.path_to_csv)
@@ -17,7 +17,15 @@ def calculate_things(simrun: SimulationRun):
 
 ```
 
-*Problem*: If someone wants to copy the logic of `calculate_things()`, he needs also needs to copy the class `SimulationRun` because `calculate_things()` takes as argument an instance of `SimulationRun`. But if we look at the implementation of `calculate_things()`, we find that the instance of `SimulationRun` is only used to get a path to a specific `.csv`-file.
+*Problem*: If someone wants to copy the logic of `calculate_things()`, he needs also needs to copy the class `SimulationRun` because `calculate_things()` takes as argument an instance of `SimulationRun`. 
+
+```python
+# before: class SimulationRun is required to use calculate_things()
+simrun = SimulationRun('name_of_simrun')
+calculate_things(simrun=simrun)
+```
+
+But if we look at the implementation of `calculate_things()`, we find that the instance of `SimulationRun` is only used to get a path to a specific `.csv`-file.
 
 It is better to get rid of the function's dependency on the `SimulationRun` class. We do that by changing the function such that it takes the path to the `.csv`-file directly:
 
@@ -27,18 +35,14 @@ def calculate_things(path_to_csv: str):
     # ...
 ```
 
-This implementation no longer has 
+With this implementation, we have the freedom to choose whether we want to use `SimulationRun` or not. We don't need `SimulationRun` if we know the path to the `.csv`-file:
 
 ```python
-# before (class SimulationRun is required to use calculate_things())
-simrun = SimulationRun('name_of_simrun')
-calculate_things(simrun=simrun)
-
-# after (with the help of SimulationRun):
+# after: with the help of SimulationRun
 simrun = SimulationRun('name_of_simrun')
 calculate_things(path_to_csv=simrun.path_to_csv)
 
-# after (without the help of SimulationRun, which is no longer required)
+# after: without the help of SimulationRun, which is no longer required
 calculate_things(path_to_csv='path/to/data/name_of_simrun.csv')
 ```
 
