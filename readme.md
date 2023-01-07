@@ -17,9 +17,9 @@ def calculate_things(simrun: SimulationRun):
 
 ```
 
-*Problem*: If someone wants to copy the logic of `calculate_things()` for his code, he needs also needs to copy the class `SimulationRun` because `calculate_things()` takes as argument an instance of `SimulationRun`. But if we look at the implementation of `calculate_things()`, we find that the instance of `SimulationRun` is only used to get a path to a specific `.csv`-file.
+*Problem*: If someone wants to copy the logic of `calculate_things()`, he needs also needs to copy the class `SimulationRun` because `calculate_things()` takes as argument an instance of `SimulationRun`. But if we look at the implementation of `calculate_things()`, we find that the instance of `SimulationRun` is only used to get a path to a specific `.csv`-file.
 
-It is better to get rid of the function's dependency on the `SimulationRun` class:
+It is better to get rid of the function's dependency on the `SimulationRun` class. We do that by changing the function such that it takes the path to the `.csv`-file directly:
 
 ```python
 def calculate_things(path_to_csv: str):
