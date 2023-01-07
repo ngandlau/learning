@@ -2,10 +2,10 @@
 
 Before:
 
-```
+```python
 class SimulationRun:
-name: str
-path_to_csv: str 
+    name: str
+    path_to_csv: str 
 
 def __init__(self, name):
     self.name = name
@@ -21,7 +21,7 @@ def calculate_things(simrun: SimulationRun):
 
 It is better to get rid of the function's dependency on the `SimulationRun` class:
 
-```
+```python
 def calculate_things(path_to_csv: str):
     df = load(path=path_to_csv)
     # ...
@@ -29,7 +29,7 @@ def calculate_things(path_to_csv: str):
 
 This implementation no longer has 
 
-```
+```python
 # before (class SimulationRun is required to use calculate_things())
 simrun = SimulationRun('name_of_simrun')
 calculate_things(simrun=simrun)
