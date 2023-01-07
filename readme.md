@@ -1,3 +1,47 @@
+## Better function design by minimizing dependencies
+
+Before:
+
+```
+class SimulationRun:
+name: str
+path_to_csv: str 
+
+def __init__(self, name):
+    self.name = name
+    self.path_to_csv = '/path/to/data/' + name + '.csv'
+
+def calculate_things(simrun: SimulationRun):
+    df = load(path=simrun.path_to_csv)
+    # ...
+
+```
+
+*Problem*: If someone wants to copy the logic of `calculate_things()` for his code, he needs also needs to copy the class `SimulationRun` because `calculate_things()` takes as argument an instance of `SimulationRun`. But if we look at the implementation of `calculate_things()`, we find that the instance of `SimulationRun` is only used to get a path to a specific `.csv`-file.
+
+It is better to get rid of the function's dependency on the `SimulationRun` class:
+
+```
+def calculate_things(path_to_csv: str):
+    df = load(path=path_to_csv)
+    # ...
+```
+
+This implementation no longer has 
+
+```
+# before (class SimulationRun is required to use calculate_things())
+simrun = SimulationRun('name_of_simrun')
+calculate_things(simrun=simrun)
+
+# after (with the help of SimulationRun):
+simrun = SimulationRun('name_of_simrun')
+calculate_things(path_to_csv=simrun.path_to_csv)
+
+# after (without the help of SimulationRun, which is no longer required)
+calculate_things(path_to_csv='path/to/data/name_of_simrun.csv')
+```
+
 ## Composing SQL queries with psycopg2
 
 ```python
@@ -13,11 +57,18 @@ FROM schema.table
 WHERE 
     name LIKE 'Nils%'
     alter = 18
+    {col1} = {val1}
+    {col2} = {val2}
 GROUP BY 
     {groupby}
 """).format(
     select=sql.Identifier('name']),
     groupby=sql.SQL(', ').join([sql.Identifier(col) for col in cols])
+    col1=sql.Identifier('alter'),
+    val1=sql.Literal(18)
+    # add filter 1=1 which doesn't filter anything
+    col2=sql.Literal(1)
+    val2=sql.Literal(1)
 )
 
 with get_connection(config) as conn:
