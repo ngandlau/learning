@@ -1,3 +1,82 @@
+## Persistent (remote) Terminal
+
+```bash
+tmux            # start terminal session, close with strg+bd
+tmux detached
+tmux attach     # restarts terminal session
+```
+
+## Returning same type
+
+```python
+from typing import TypeVar, Sequence
+
+## Example 1 ***************************************************
+# wrong typing
+def do_nothing(x: Sequence) -> Sequence:
+    return x
+
+# correct typing
+def do_nothing(x: SequenceT) -> SequenceT:
+    return x
+
+## Example 2 **************************************************
+SequenceT = TypeVar('SequenceT', list, tuple, set)
+
+def yyyymmdd(datetimes: SequenceT[datetime]) -> SequenceT[str]:
+    result = [dt.strftime('%Y-%m-%d') for dt in datetimes]
+    return type(datetimes)(result)
+```
+
+The typing is wrong. The function takes as argument a Sequence of datetimes and returns a Sequence of datetimes. This would hold if:
+
+* Input: a _list_ of datetimes, Output: a _list_ of datetimes
+* Input: a _list_ of datetimes, Output: a _tuple_ of datetimes (both _list_ and _tuple_ are of type Sequence, hence the type hints are not violated)
+
+What we want to say is "if the input is a Sequence of type _list_, then we want to return a Sequence of the same type, namely type _list_". And so if the input sequence is of type _tuple_, we want to return a sequence of type _tuple_.
+
+This can be achieved ... -> see fluent python
+
+```python
+from typing import TypeVar
+from random import shuffle 
+from collections.abc import Sequence, Hashable
+
+T = TypeVar('T') # Generic TypeVar
+
+def sample(population: Sequence[T], size: int) -> list[T]:
+    result = shuffle(list(population))
+    return result[:size]
+
+# TypeVar T indicates that the type of the elements in the 
+# returned list is the same as the type of the elements in
+# the input sequence `population`
+```
+
+```python
+# Generic TypeVar
+T = TypeVar('T') 
+
+# Restricted TypeVar
+NumberT = TypeVar('NumberT', float, Decimal, Fraction) # Restricted TypeVar
+
+# Bounded TypeVar
+HashableT = TypeVar('HashableT', bound=Hashable)
+# Hashable are objects of types like str, float, int, Decimal...
+# Unhashable are objects of types like list, tuple, set, ...
+```
+
+## Debugging
+
+```python
+# import pdb
+
+import code
+code.interact(local=locals())
+
+python -i script.py
+```
+
 ## Better function design by minimizing dependencies
 
 Before:
