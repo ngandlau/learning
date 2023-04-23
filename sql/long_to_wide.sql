@@ -38,11 +38,11 @@ group by tag, kante;
 DROP TABLE IF EXISTS tmp_table;
 CREATE TABLE tmp_table (
 	tag TEXT,
-	modellzug_id INT,
+	modellzug INT,
 	kante TEXT
 );
 
-INSERT INTO tmp_table (tag, modellzug_id, kante)
+INSERT INTO tmp_table (tag, modellzug, kante)
 VALUES
 ('montag', 1, '(a,b)'),
 ('montag', 1, '(a,b)'),
@@ -56,24 +56,24 @@ SELECT * FROM tmp_table;
 select
 	tag,
 	kante,
-	case when modellzug_id IN (1, 2) then 1 end as n_zuege_fv,
-	case when modellzug_id IN (8, 9) then 1 end as n_zuege_nv
+	case when modellzug IN (1, 2) then 1 end as n_zuege_fv,
+	case when modellzug IN (8, 9) then 1 end as n_zuege_nv
 from tmp_table;
 
 select
 	tag,
 	kante,
-	SUM(case when modellzug_id IN (8, 9) then 1 end) as n_zuege_nv,
-	SUM(case when modellzug_id IN (1, 2) then 1 end) as n_zuege_fv
+	SUM(case when modellzug IN (8, 9) then 1 end) as n_zuege_nv,
+	SUM(case when modellzug IN (1, 2) then 1 end) as n_zuege_fv
 from tmp_table
 group by tag, kante;
 
 select
 	tag,
 	kante,
-	MAX(case when modellzug_id IN (8, 9) then COUNT(*) end) as n_zuege_nv,
-	MAX(case when modellzug_id IN (1, 2) then COUNT(*) end) as n_zuege_fv
+	MAX(case when modellzug IN (8, 9) then COUNT(*) end) as n_zuege_nv,
+	MAX(case when modellzug IN (1, 2) then COUNT(*) end) as n_zuege_fv
 from tmp_table
-group by tag, kante, modellzug_id;
+group by tag, kante, modellzug;
 
 
