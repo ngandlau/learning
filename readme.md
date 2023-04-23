@@ -1,3 +1,38 @@
+## Notes from "Fluent Python"
+
+"Often _concrete strategies_ have no internal state [which would be implemented using class attributes]; they only deal with data from the _context_. If that is the case, then by all means **use plain old functions instead of coding single-method classes implementing a single-method interfaces declared in yet another class**. 
+
+```python
+# === Before: Strategy pattern with classes ===
+class Order: # the context
+    customer: Customer
+    cart: Sequence[LineItem]
+    promotion: Optional[Promotion] = None
+
+class Promotion(ABC):
+    @abstractmethod
+    def discount(self, order: Order) -> Decimal: pass
+
+class FidelityPromo(Promotion): ...
+class BulkItemPromo(Promotion): ...
+class LargeOrderPromo(Promotion): ...
+
+# === After: Strategy pattern with functions ===
+@dataclass(frozen=True)
+class Order: # the context
+    customer: Customer
+    cart: Sequence[LineItem]
+    promotion: Optional[Callable[['Order'], Decimal]] = None
+    ...
+
+def fidelity_promo(order: Order) -> Decimal: ...
+def bulk_item_promo(order: Order) -> Decimal: ...
+def large_order_promo(order: Order) -> Decimal: ...
+
+```
+
+
+
 ## Persistent (remote) Terminal
 
 ```bash
