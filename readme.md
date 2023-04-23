@@ -31,6 +31,21 @@ def large_order_promo(order: Order) -> Decimal: ...
 
 ```
 
+---
+
+"Once you get used to the ideqa that **functions are first-class objects**, it naturally follows that building data structures holding functions often makes sense (e.g. a list of functions, `List[Callable]`).
+
+```python
+# example
+def fidelity_promo(order: Order) -> Decimal: ...
+def bulk_item_promo(order: Order) -> Decimal: ...
+def large_order_promo(order: Order) -> Decimal: ...
+
+promos: List[Callable] = [fidelity_promo, bulk_item_promo, large_order_promo]
+
+def best_promo(order: Order) -> Decimal:
+    return max(promo(order) for promo in promos)
+```
 
 
 ## Persistent (remote) Terminal
