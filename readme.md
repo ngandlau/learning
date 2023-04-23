@@ -1,5 +1,7 @@
 ## Notes from "Fluent Python"
 
+### Chapter on _Strategy Pattern_
+
 "Often _concrete strategies_ have no internal state [which would be implemented using class attributes]; they only deal with data from the _context_. If that is the case, then by all means **use plain old functions instead of coding single-method classes implementing a single-method interfaces declared in yet another class**. 
 
 ```python
@@ -74,6 +76,38 @@ list_of_promo_funcs = [
     in inspect.getmembers(file_with_functions, inspect.isfunction)
 ]
 ```
+
+---
+
+A decorator that adds a function to a list (a registry), and returns the same function:
+
+```python
+promos: list[Promotion] = [] # registry
+
+def promotion(promo: Promotion) -> Promotion:
+    """A decorator that returns the `promo` function unchanged,
+    after appending it to the `promos` list."""
+    promos.append(promos)
+    return promo
+
+@promotion
+def fidelity_promo(order: Order) -> Decimal: ...
+
+@promotion
+def bulk_item_promo(order: Order) -> Decimal: ...
+
+@promotion
+def large_order_promo(order: Order) -> Decimal: ...
+
+def best_promo(order: Order) -> Decimal:
+    return max(promo(order) for promo in promos)
+```
+
+Advantages:
+
+* the `@promotion` decorator makes it easy to temporarily disable a promotion -- just comment out the decorator.
+* "promotional discount strategies may be defined in other modules, anywhere in the system, as long as the `@promotion` decorator is applied to them. 
+
 
 ## Persistent (remote) Terminal
 
