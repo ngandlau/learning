@@ -47,6 +47,33 @@ def best_promo(order: Order) -> Decimal:
     return max(promo(order) for promo in promos)
 ```
 
+--- 
+
+Using `inspect` module to get all functions from a python file and store them in a list in another python file.
+
+```
+src/
+|-- file_with_functions.py
+|-- other_file.py
+```
+
+```python
+# file_with_functions.py
+def fidelity_promo(order: Order) -> Decimal: ...
+def bulk_item_promo(order: Order) -> Decimal: ...
+def large_order_promo(order: Order) -> Decimal: ...
+```
+
+```python
+# other_file.py
+import inspect
+import file_with_functions
+
+list_of_promo_funcs = [
+    func for _, func
+    in inspect.getmembers(file_with_functions, inspect.isfunction)
+]
+```
 
 ## Persistent (remote) Terminal
 
