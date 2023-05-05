@@ -1,3 +1,51 @@
+## How to start a new software project
+
+Software design is a wicked problem (Code Complete, 2nd Edition). 
+
+At the start of a software project it is often unclear how the code should be structured. You don't know which functions you are going to need. So you can't know what _groups_ of functions will emerge. 
+
+Software design is a wicked problem. And wicked problem "that could be clearly defined only by solving it, or by solving part of it. This paradox implies, essentially, that you have to 'solve' the problem once in order to clearly define it and then solve it again to create a solution that works." (Code Complete, 2nd Edition).
+
+Good engineers have observed this problem.
+
+In some Twitch-stream, George Hotz says that his first write of a software is trash, the second re-write is okay, the third is good, and the fourth is then almost 'perfect'. 
+
+Netflix-Engineer ThePrimagean describes his preferred workflow when he starts a new project as follows:
+
+* start out with a single file
+* dump all code in that single file
+* until at some point a structure emerges, and it becomes clear what different modules your code consists of. 
+
+You do not know the "good" structure of your software _before_ starting to write it. 
+
+That is problematic in projects that use object-oriented design. In such project, you map out the architectore before actually writing code. You come up with classes that you think you will need and define relationships between them. But then, once you actually write code, you notice that the structure of classes doesn't quite work well. So every few months you drop the current class model and re-design it to accomodate knowledge about new problem.
+
+## Notes from "Expert Python Programming"
+
+If you have something like:
+
+```python
+# before *********************************************************
+from src.pdfgen import PDFGen
+PDFGen().create(data, template)
+# PDFGen is instantiated, but any instance of the class PDFGen can
+# generate any PDF instance. So we can hide the instantiation.
+
+# after *********************************************************
+from src.pdf import generate
+generate(data, template)
+# The instantiation of PDFGen class is hidden.
+```
+
+---
+
+"A function or a method should not be bigger than a screen, which is around 25 to 30 lines. Otherwise it is hard to follow and understand."
+
+the API should always be tested from the user's point of view to
+make sure it is usable, mnemonic, and concise
+
+---
+
 ## Notes from "Fluent Python"
 
 Notes and examples taken from [Fluent Python, 2nd Edition](https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/).
@@ -13,7 +61,7 @@ class Order: # the context
     customer: Customer
     cart: Sequence[LineItem]
     promotion: Optional[Promotion] = None
-    ...
+    ... 
 
 # an abstract class that only provides a single method
 # should trigger the question whether you're not overcomplicating
