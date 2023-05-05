@@ -1,3 +1,11 @@
+## You aren't gonna need it 
+
+Do not prematurely optimize your code, say, a function, because you think "maybe in the future we want to also want this function to do this-and-that". Abstracting your code for _potential_ future requirements almost always hurts.
+
+This is observed by others, see e.g. [here](https://www.youtube.com/watch?v=DsAclZbP_Us):
+
+> 
+
 ## How to start a new software project
 
 Software design is a wicked problem (Code Complete, 2nd Edition). 
@@ -7,6 +15,8 @@ At the start of a software project it is often unclear how the code should be st
 Software design is a wicked problem. And wicked problem "that could be clearly defined only by solving it, or by solving part of it. This paradox implies, essentially, that you have to 'solve' the problem once in order to clearly define it and then solve it again to create a solution that works." (Code Complete, 2nd Edition).
 
 Good engineers have observed this problem.
+
+> I can't predict the correct code structure for something I haven't done yet. (Casey Muratori, see [here](https://www.youtube.com/watch?v=DsAclZbP_Us)).
 
 In some Twitch-stream, George Hotz says that his first write of a software is trash, the second re-write is okay, the third is good, and the fourth is then almost 'perfect'. 
 
