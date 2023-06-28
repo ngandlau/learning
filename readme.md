@@ -1,34 +1,26 @@
 ## You aren't gonna need it 
 
-Do not prematurely optimize your code, say, a function, because you think "maybe in the future we want to also want this function to do this-and-that". Abstracting your code for _potential_ future requirements almost always hurts.
+Do not prematurely optimize your code, say, a function, because you think "maybe in the future we want to also want this function to do this-and-that". Abstracting your code for _potential_ future requirements almost always hurts. 
 
-This is observed by others, see e.g. [here](https://www.youtube.com/watch?v=DsAclZbP_Us):
-
-> 
+For details, see for example [https://www.youtube.com/watch?v=DsAclZbP_Us](https://www.youtube.com/watch?v=DsAclZbP_Us)
 
 ## How to start a new software project
 
-Software design is a wicked problem (Code Complete, 2nd Edition). 
-
 At the start of a software project it is often unclear how the code should be structured. You don't know which functions you are going to need. So you can't know what _groups_ of functions will emerge. 
 
-Software design is a wicked problem. And wicked problem "that could be clearly defined only by solving it, or by solving part of it. This paradox implies, essentially, that you have to 'solve' the problem once in order to clearly define it and then solve it again to create a solution that works." (Code Complete, 2nd Edition).
+That's why the author of _Code Complete_ calls software design a _wicked problem_. Wicked problems are problems _"that could be clearly defined only by solving it, or by solving part of it."_ This paradox implies that you must 'solve' the problem first in order to clearly define it. Only than you can come up with a solution that works and one that is beautiful (Code Complete, 2nd Edition).
 
-Good engineers have observed this problem.
+The fact that you often don't know what a good structure of your code looks like before starting to write code is especially problematic in projects that use object-oriented design. In such project, you map out the architectore before actually writing code. You come up with classes that you think you will need and define relationships between them. But then, once you actually write code, you notice that the structure of classes doesn't quite work well. So every few months you drop the current class model and re-design it to accomodate knowledge about new problem.
 
-> I can't predict the correct code structure for something I haven't done yet. (Casey Muratori, see [here](https://www.youtube.com/watch?v=DsAclZbP_Us)).
+Here a quotes from other popular engineers that relate to this:
 
-In some Twitch-stream, George Hotz says that his first write of a software is trash, the second re-write is okay, the third is good, and the fourth is then almost 'perfect'. 
+* "I can't predict the correct code structure for something I haven't done yet" (Casey Muratori, see [here](https://www.youtube.com/watch?v=DsAclZbP_Us)).
+* In one Twitch stream George Hotz said that his first write of a software is trash, the second re-write is okay, the third is good, and the fourth is then almost 'perfect'. 
+* Netflix-Engineer ThePrimagean describes his preferred workflow when he starts a new project as follows:
+	1. start out with a single file.
+	1. dump all code in that single file.
+	1. until at some point a structure emerges, and it becomes clear what different modules your code consists of. 
 
-Netflix-Engineer ThePrimagean describes his preferred workflow when he starts a new project as follows:
-
-* start out with a single file
-* dump all code in that single file
-* until at some point a structure emerges, and it becomes clear what different modules your code consists of. 
-
-You do not know the "good" structure of your software _before_ starting to write it. 
-
-That is problematic in projects that use object-oriented design. In such project, you map out the architectore before actually writing code. You come up with classes that you think you will need and define relationships between them. But then, once you actually write code, you notice that the structure of classes doesn't quite work well. So every few months you drop the current class model and re-design it to accomodate knowledge about new problem.
 
 ## Notes from "Expert Python Programming"
 
