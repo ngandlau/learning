@@ -1,8 +1,34 @@
+## Copy-Paste Faktor
+
+When writing code, it can be helpful to ask yourself **"how well is the function I'm implementing copy-paste-able?"**. 
+
+Functions that are easily copy-paste-able do not have dependencies on other functions. Often, this is desired. 
+
+Here is a function that is easily copy-paste-able:
+
+```python
+def add(a: int, b: int) -> int:
+    return a + b
+```
+
+In contrast, the following (equivalent) function is **not** easily copy-paste-able. Why? Because it takes as arugment a `integer_pair`, which is an instance of the class `IntegerPair`. Thus, if you want to _copy_ the `add()` function, you will also need to _copy_ the class `IntegerPair`. In other words: `add()` is dependent on `IntegerPair`.
+
+```python
+def add(integer_pair: IntegerPair) -> int:
+    return variables.a + variables.b
+
+@dataclass
+class IntegerPair:
+    a: int
+    b: int
+```
+
+
 ## You aren't gonna need it 
 
 Do not prematurely optimize your code, say, a function, because you think "maybe in the future we want to also want this function to do this-and-that". Abstracting your code for _potential_ future requirements almost always hurts. 
 
-For details, see for example [https://www.youtube.com/watch?v=DsAclZbP_Us](https://www.youtube.com/watch?v=DsAclZbP_Us)
+This is observed by others, see e.g. [here](https://www.youtube.com/watch?v=DsAclZbP_Us):
 
 ## How to start a new software project
 
