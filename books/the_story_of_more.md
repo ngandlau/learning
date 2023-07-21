@@ -33,15 +33,15 @@ Using combinations of dots and lines, we can code a simple "SOS" or the entire L
 
 DNA has a vocabulary of 4 tokens, the nucleotides A, C, T, G.
 DNA is a sequence of GENES.
-A GENE is a combination of A,C,T,G that describes how to make a protein. 
-A GENE is a recipe of how to make a protein. 
+A GENE is a combination of A,C,T,G that describes how to make a protein. A GENE is a recipe of how to make a protein. 
 Every PROTEIN is capable of doing a job.
 Thus DNA is like a long recipe book, where each recipe describes how to make a protein.
 
-DNA = a sequence of genes
-Gene = a recipe for a protein, written in the language of "ACTG"
-Protein = something that is capable of doing a job
-genetically modified organisms (GMOs) = organisms whose DNA was modified. Maybe a gene was deleted, or a new gene added.
+* DNA = a sequence of genes
+* Gene = a recipe for a protein, written in the language of "ACTG"
+* Protein = something that is capable of doing a job
+* genetically modified organisms (GMOs) = organisms whose DNA was modified. Maybe a gene was deleted, or a new gene added.
+
 
 ## meat
 
