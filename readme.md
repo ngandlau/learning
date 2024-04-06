@@ -1,3 +1,8 @@
+# :speech_balloon: Gearning in Public
+
+This readme & repository contains some of my learnings related to software engineering, data engineering, and data science.
+It primarly acts as a reference sheet that I myself come back to every once in a while.
+
 ## Copy-Paste Faktor
 
 When writing code, it can be helpful to ask yourself **"how well is the function I'm implementing copy-paste-able?"**. 
