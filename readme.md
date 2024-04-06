@@ -1,4 +1,4 @@
-# :speech_balloon: Gearning in Public
+# :speech_balloon: Learning in Public
 
 This readme & repository contains some of my learnings related to software engineering, data engineering, and data science.
 It primarly acts as a reference sheet that I myself come back to every once in a while.
