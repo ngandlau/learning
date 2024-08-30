@@ -1,7 +1,40 @@
 # :speech_balloon: Learning in Public
 
-This readme & repository contains some of my learnings related to software engineering, data engineering, and data science.
-It primarly acts as a reference sheet that I myself come back to every once in a while.
+This readme & repository contains some of my learnings related to software engineering, data engineering, and data science. It primarly acts as a reference sheet that I myself come back to every once in a while.
+
+## Custom Field Validations in Pydantic
+
+Context: You want to serialize data into a `BaseModel`, and one of your `BaseModel`'s attributes is inside another dictionary.
+
+```python
+from pydantic import BaseModel
+from pydantic.functional_validators import field_validator
+
+# Input
+data = {
+    "A": "a",
+    "B": "b",
+    "C": {"C1": "c", "C2": "c2"},
+}
+
+# Desired Output:
+# An object where C is the value of the key 'C1' in the dictionary 'C'
+# Object(A='a', B='b', C='c')
+
+class Object(BaseModel):
+    A: str
+    B: str
+    C: str
+
+    @field_validator('C', mode='before')
+    @classmethod
+    def extract_c1_from_dict(cls, v: dict) -> str:
+        return v.get('C1')
+
+# Actual Result
+Object(**data)
+# > Object(A='a', B='b', C='c')
+```
 
 ## Copy-Paste Faktor
 
